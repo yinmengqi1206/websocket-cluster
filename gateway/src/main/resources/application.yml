@@ -1,0 +1,14 @@
+server:
+  port: 1200
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:  # 路由
+        - id: path-route
+          uri: lb://websocket-server
+          predicates:
+            - Path=/socket/websocket/**
+          filters:
+            - StripPrefix=1
