@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 /**
  * 真实节点的副本：虚拟节点
- *
- * @author lawrence
- * @since 2021/3/23
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 public class VirtualNode<T extends Node> implements Node, Serializable {
 

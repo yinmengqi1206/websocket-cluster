@@ -2,11 +2,11 @@ package com.ymq.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * @author lawrence
- * @since 2021/3/19
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 @SpringBootApplication
 public class GatewayApp {

@@ -12,9 +12,9 @@ import java.util.TreeMap;
 
 /**
  * T: 真实节点泛型
- *
- * @author lawrence
- * @since 2021/3/23
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 public class ConsistentHashRouter<T extends Node> {
 

@@ -1,8 +1,9 @@
 package com.ymq.gateway.hashring;
 
 /**
- * @author lawrence
- * @since 2021/3/23
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 public interface HashAlgorithm {
 

@@ -1,10 +1,10 @@
 package com.ymq.gateway.hashring;
 
 /**
- * Hash 环的节点
- *
- * @author lawrence
- * @since 2021/3/23
+ * Hash环节点
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 public interface Node {
 

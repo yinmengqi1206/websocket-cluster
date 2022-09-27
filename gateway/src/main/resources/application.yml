@@ -6,9 +6,7 @@ spring:
   cloud:
     gateway:
       routes:  # 路由
-        - id: path-route
+        - id: websocket-route
           uri: lb://websocket-server
           predicates:
-            - Path=/socket/websocket/**
-          filters:
-            - StripPrefix=1
+            - Path=/websocket/**

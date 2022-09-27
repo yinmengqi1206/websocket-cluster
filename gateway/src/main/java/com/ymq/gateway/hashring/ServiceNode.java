@@ -6,9 +6,9 @@ import java.util.Objects;
 /**
  * 真实节点
  * 可以添加更多特性字段来区分不同的实例，如 DataCenter, Port 等等
- *
- * @author lawrence
- * @since 2021/3/23
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 public class ServiceNode implements Node, Serializable {
 

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 初始化
- *
- * @author lawrence
- * @since 2021/3/23
+ * 初始化哈希环
+ * @author yinmengqi
+ * @version 1.0
+ * @date 2022/9/26 15:37
  */
 @Configuration
 @Slf4j
