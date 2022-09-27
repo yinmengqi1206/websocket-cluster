@@ -10,3 +10,21 @@ spring:
           uri: lb://websocket-server
           predicates:
             - Path=/websocket/**
+  redis:
+    client-type: lettuce
+    host: 1.116.189.69
+    port: 6379
+    username: default
+    password: U4qUTq8MFfgvuKv2
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 1
+        # 连接池中的最大空闲连接
+        max-idle: 100
+        # 连接池的最大数据库连接数
+        max-active: 100
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 10s
+    timeout: 10000
+    database: 2

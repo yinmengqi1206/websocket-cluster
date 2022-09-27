@@ -28,6 +28,10 @@ public class ServiceNode implements Node, Serializable {
         return port;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
     @Override
     public String getKey() {
         return ip;
