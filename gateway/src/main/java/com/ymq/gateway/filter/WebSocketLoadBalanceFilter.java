@@ -30,19 +30,19 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.*
  * @version 1.0
  * @date 2022/9/26 15:37
  */
-public class CustomReactiveLoadBalanceFilter extends ReactiveLoadBalancerClientFilter implements BeanPostProcessor {
+public class WebSocketLoadBalanceFilter extends ReactiveLoadBalancerClientFilter implements BeanPostProcessor {
 
     private static final String ROUTE_ID = "websocket-route";
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomReactiveLoadBalanceFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebSocketLoadBalanceFilter.class);
 
     final LoadBalancerClientFactory clientFactory;
     final GatewayLoadBalancerProperties properties;
     final ConsistentHashRouter<ServiceNode> consistentHashRouter;
 
-    public CustomReactiveLoadBalanceFilter(LoadBalancerClientFactory clientFactory,
-                                           GatewayLoadBalancerProperties properties,
-                                           ConsistentHashRouter<ServiceNode> consistentHashRouter) {
+    public WebSocketLoadBalanceFilter(LoadBalancerClientFactory clientFactory,
+                                      GatewayLoadBalancerProperties properties,
+                                      ConsistentHashRouter<ServiceNode> consistentHashRouter) {
         super(clientFactory, properties);
         this.clientFactory = clientFactory;
         this.properties = properties;

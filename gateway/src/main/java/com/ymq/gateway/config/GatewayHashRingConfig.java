@@ -1,6 +1,6 @@
 package com.ymq.gateway.config;
 
-import com.ymq.gateway.filter.CustomReactiveLoadBalanceFilter;
+import com.ymq.gateway.filter.WebSocketLoadBalanceFilter;
 import com.ymq.gateway.hashring.ConsistentHashRouter;
 import com.ymq.gateway.hashring.ServiceNode;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +33,9 @@ public class GatewayHashRingConfig {
      * @return 注入自定义的 Reactive 过滤器 Bean 对象
      */
     @Bean
-    public CustomReactiveLoadBalanceFilter customReactiveLoadBalanceFilter(GatewayLoadBalancerProperties properties,
-                                                                           ConsistentHashRouter<ServiceNode> consistentHashRouter) {
-        return new CustomReactiveLoadBalanceFilter(clientFactory, properties, consistentHashRouter);
+    public WebSocketLoadBalanceFilter customReactiveLoadBalanceFilter(GatewayLoadBalancerProperties properties,
+                                                                      ConsistentHashRouter<ServiceNode> consistentHashRouter) {
+        return new WebSocketLoadBalanceFilter(clientFactory, properties, consistentHashRouter);
     }
 
     @Bean
