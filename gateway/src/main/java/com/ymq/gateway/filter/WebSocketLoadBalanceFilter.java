@@ -87,6 +87,10 @@ public class WebSocketLoadBalanceFilter extends ReactiveLoadBalancerClientFilter
         assert uri != null;
         String userIdFromRequest = getUserIdFromRequest(exchange);
         ServiceNode serviceNode = consistentHashRouter.routeNode(userIdFromRequest);
+        if(Objects.isNull(serviceNode)){
+            logger.error("无可用节点");
+            return Mono.empty();
+        }
         return Mono.just(serviceNode);
     }
 
