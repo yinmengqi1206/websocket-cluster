@@ -3,7 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.12</version>
+        <relativePath/>
+    </parent>
     <groupId>com.ymq</groupId>
     <artifactId>websocket-cluster</artifactId>
     <packaging>pom</packaging>
@@ -18,13 +23,14 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
-        <spring-boot.version>2.7.3</spring-boot.version>
         <netty-websocket.version>0.12.0</netty-websocket.version>
         <lombok.version>RELEASE</lombok.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <logback.version>1.2.3</logback.version>
+        <logback.version>1.2.9</logback.version>
         <junit.version>5.2.0</junit.version>
         <fastjson.version>2.0.11</fastjson.version>
+        <!--swagger ui knife4j版本-->
+        <knife4j.version>4.1.0</knife4j.version>
     </properties>
 
     <dependencies>
@@ -74,17 +80,19 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.yeauty</groupId>
                 <artifactId>netty-websocket-spring-boot-starter</artifactId>
                 <version>${netty-websocket.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -4,18 +4,14 @@ import com.ymq.gateway.constant.GlobalConstant;
 import com.ymq.gateway.filter.WebSocketLoadBalanceFilter;
 import com.ymq.gateway.hashring.ConsistentHashRouter;
 import com.ymq.gateway.hashring.ServiceNode;
-import com.ymq.gateway.hashring.VirtualNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.config.GatewayLoadBalancerProperties;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisNode;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

@@ -3,10 +3,10 @@ spring:
     name: websocket-server
   redis:
     client-type: lettuce
-    host: 1.116.189.69
+    host: ubuntu-linux
     port: 6379
     username: default
-    password: U4qUTq8MFfgvuKv2
+    password: 123456
     lettuce:
       pool:
         # 连接池中的最小空闲连接
