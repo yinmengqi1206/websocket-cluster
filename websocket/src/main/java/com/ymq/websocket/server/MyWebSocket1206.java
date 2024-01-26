@@ -10,12 +10,14 @@ import org.yeauty.pojo.Session;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.ymq.websocket.server.WebSocketConst.PORT;
+
 /**
  * @author yinmengqi
  * @version 1.0
  * @date 2022/9/22 14:30
  */
-@ServerEndpoint(path = "/websocket/{userId}",port = "1206")
+@ServerEndpoint(path = "/websocket/{userId}",port = PORT)
 @Component
 @Slf4j
 public class MyWebSocket1206 {

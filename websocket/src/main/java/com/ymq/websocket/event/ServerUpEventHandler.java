@@ -1,6 +1,7 @@
 package com.ymq.websocket.event;
 
 import com.alibaba.fastjson.JSON;
+import com.ymq.websocket.server.WebSocketConst;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class ServerUpEventHandler implements ApplicationListener<ApplicationRead
         Map<String,String> map = new HashMap<>();
         String hostAddress = address.getHostAddress();
         map.put("ip",hostAddress);
-        map.put("port","1207");
+        map.put("port", WebSocketConst.PORT);
         map.put("online","1");
         redisTemplate.convertAndSend(SOCKET_NODE, JSON.toJSONString(map));
     }
