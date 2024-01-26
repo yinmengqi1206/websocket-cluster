@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <groupId>com.ymq</groupId>
-    <artifactId>websocket-cluster</artifactId>
+    <artifactId>free-websocket-cluster</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
