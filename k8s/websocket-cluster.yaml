@@ -1,0 +1,176 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  REDIS_HOST: "host.docker.internal"
+  REDIS_PORT: "6379"
+  WEBSOCKET_PORT: "1206"
+  GATEWAY_PORT: "1200"
+---
+# Gateway Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: img-gateway
+  labels:
+    app: img-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: img-gateway
+  template:
+    metadata:
+      labels:
+        app: img-gateway
+    spec:
+      # 可选：如果 Pod 内无法解析 host.docker.internal，可添加以下配置
+      # hostAliases:
+      # - ip: "192.168.65.2"   # Docker Desktop 内部网关 IP
+      #   hostnames:
+      #   - "host.docker.internal"
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: gateway
+          image: img-gateway:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 1200
+              name: http
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_PORT
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: GATEWAY_PORT
+          readinessProbe:
+            tcpSocket:
+              port: 1200
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 1200
+            initialDelaySeconds: 45
+            periodSeconds: 20
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+---
+# Gateway Service（对外暴露，NodePort）
+apiVersion: v1
+kind: Service
+metadata:
+  name: img-gateway-svc
+spec:
+  type: NodePort
+  selector:
+    app: img-gateway
+  ports:
+    - port: 1200
+      targetPort: 1200
+      nodePort: 31200
+---
+# WebSocket Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: img-websocket
+  labels:
+    app: img-websocket
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: img-websocket
+  template:
+    metadata:
+      labels:
+        app: img-websocket
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: websocket
+          image: img-websocket:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 1206
+              name: ws
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_PORT
+            - name: WEBSOCKET_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: WEBSOCKET_PORT
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: WEBSOCKET_PORT
+          readinessProbe:
+            tcpSocket:
+              port: 1206
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 1206
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    # 调用应用的 offline 接口，通知下线（如果没有 curl 可改用 wget 或忽略）
+                    curl -X POST http://localhost:1206/offline || true
+                    # 等待路由信息同步
+                    sleep 10
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+---
+# WebSocket Service（可选，用于内部探针或预留）
+apiVersion: v1
+kind: Service
+metadata:
+  name: img-websocket-svc
+spec:
+  selector:
+    app: img-websocket
+  ports:
+    - port: 1206
+      targetPort: 1206
+  type: ClusterIP

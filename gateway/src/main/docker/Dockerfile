@@ -77,7 +77,7 @@
 #   accessed directly. (example: "foo.example.com,bar.example.com")
 #
 ###
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.18
+FROM eclipse-temurin:21-jre-jammy
 
 ENV LANGUAGE='en_US:en'
 
@@ -90,4 +90,4 @@ USER 185
 ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/app.jar"
 
-ENTRYPOINT [ "/opt/jboss/container/java/run/run-java.sh" ]
+ENTRYPOINT ["java", "-jar", "/deployments/app.jar"]

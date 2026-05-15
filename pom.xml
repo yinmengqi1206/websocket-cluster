@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.12</version>
+        <version>3.3.5</version>
         <relativePath/>
     </parent>
     <groupId>com.ymq</groupId>
@@ -19,18 +19,15 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <spring-cloud.version>2021.0.3</spring-cloud.version>
-        <netty-websocket.version>0.12.0</netty-websocket.version>
-        <lombok.version>RELEASE</lombok.version>
-        <slf4j.version>1.7.36</slf4j.version>
-        <logback.version>1.2.9</logback.version>
-        <junit.version>5.2.0</junit.version>
-        <fastjson.version>2.0.11</fastjson.version>
-        <!--swagger ui knife4j版本-->
-        <knife4j.version>4.1.0</knife4j.version>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <spring-cloud.version>2023.0.2</spring-cloud.version>
+        <netty-websocket.version>0.13.1</netty-websocket.version>
+        <lombok.version>1.18.34</lombok.version>
+        <junit.version>5.10.2</junit.version>
+        <fastjson.version>2.0.53</fastjson.version>
+        <knife4j.version>4.5.0</knife4j.version> <!-- 需验证与 Spring Boot 3 兼容性 -->
     </properties>
 
     <dependencies>
@@ -53,19 +50,14 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -80,8 +72,8 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.yeauty</groupId>
-                <artifactId>netty-websocket-spring-boot-starter</artifactId>
+                <groupId>io.github.jackspeed</groupId>
+                <artifactId>netty-websocket-spring-boot3-starter</artifactId>
                 <version>${netty-websocket.version}</version>
             </dependency>
         </dependencies>
